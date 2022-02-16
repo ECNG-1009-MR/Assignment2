@@ -6,6 +6,7 @@
 int main()
 {//Hi Matthias
     std::cout << "Hello World!\n";
+    std::cout << "Does it work?";
 }
 
 
