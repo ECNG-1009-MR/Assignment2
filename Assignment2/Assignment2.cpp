@@ -34,6 +34,8 @@ int main()
     //test coding
     //testing
 
+    //This will cause a merge error
+
 
     //another merge test
 }
