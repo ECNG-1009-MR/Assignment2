@@ -4,7 +4,7 @@
 #include <iostream>
 
 int main()
-{//Hi Matthias
+{
     std::cout << "Hello World!\n";
 
 }
