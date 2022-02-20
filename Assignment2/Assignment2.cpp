@@ -85,27 +85,27 @@ void retrieveData(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
 void writedata(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec, vector<vector<double>> gpa, vector<vector<double>> average)
 {
 	ofstream output;
-	output.open("studentsummary.txt");
-	for (int i = 0; i < IDvec[0].size(); i++) 
+	output.open("studentsummary.txt"); // opens summary file
+	for (int i = 0; i < IDvec[0].size(); i++)  // loop to determine row to get data from
 	{
 
 		output << " Student		ECNG1006	ECNG1009	ECNG1014	ECNG1016	Average		GPA	" << endl;
-		output << IDvec[0][i];
-		for (int j = 0; j < 4; j++)
+		output << IDvec[0][i]; // outputs the id number at the i position of the vector
+		for (int j = 0; j < 4; j++) // loop to determine column to get data from
 		{
 
-			if (j == 1) // need to find a better way to skip blank input
+			if (Marksvec[j].empty()) //outputs N/A and goes to next value of j if there is no data
 			{
-				output << "		";
+				output << "		  N/A";
 				continue;
 
 			}
 
-			output << "		" << Marksvec[j][i];
+			output << "		   " << Marksvec[j][i]; // outputs data from the j column i row
 
 
 		}
-		output << "		" << average[0][i] << "		" << gpa[0][i] << endl << endl;
+		output << "		  " << average[0][i] << "		" << gpa[0][i] << endl << endl;
 
 	}
 	output.close();
