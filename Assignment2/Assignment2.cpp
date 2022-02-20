@@ -82,12 +82,10 @@ void retrieveData(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
 
 
 
-void writedata(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
+void writedata(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec, vector<double> gpa, vector<double> average)
 {
 	ofstream output;
 	output.open("studentsummary.txt");
-	int gpa = 2; //replace with vector
-	int average = 3; // replace with vector
 	for (int i = 0; i < 9; i++) // couldnt count to max length of vector for some reason
 	{
 
@@ -107,7 +105,7 @@ void writedata(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
 
 
 		}
-		output << "		" << average << "		" << gpa << endl << endl;
+		output << "		" << average[i] << "		" << gpa[i] << endl << endl;
 
 	}
 	output.close();
@@ -123,10 +121,11 @@ int main()
 	vector<vector<int>> Marksvec;
 
 	retrieveData(IDvec, Marksvec);
-	
+	vector<double> gpa { 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9 }; // repalce with real vector
+	vector<double> average { 2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9 }; // repalce with real vector
 	//Test cout of the 4th mark in "ecng1014marks.txt"
 	cout << Marksvec[2][3];
-	writedata(IDvec, Marksvec);
+	writedata(IDvec, Marksvec, gpa , average);
 
 }
 
