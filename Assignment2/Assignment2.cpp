@@ -82,16 +82,38 @@ void retrieveData(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
 
 
 
-/*Part 2: Alex ---------------------------------------------------------------------------------------
- "Write the required information to a student summary file (as shown in assignment 2 file)"
+void writedata(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
+{
+	ofstream output;
+	output.open("studentsummary.txt");
+	int gpa = 2; //replace with vector
+	int average = 3; // replace with vector
+	for (int i = 0; i < 9; i++) // couldnt count to max length of vector for some reason
+	{
+
+		output << " Student		ECNG1006	ECNG1009	ECNG1014	ECNG1016	Average		GPA	" << endl;
+		output << IDvec[0][i];
+		for (int j = 0; j < 4; j++)
+		{
+
+			if (j == 1) // need to find a better way to skip blank input
+			{
+				output << "		";
+				continue;
+
+			}
+
+			output << "		" << Marksvec[j][i];
 
 
+		}
+		output << "		" << average << "		" << gpa << endl << endl;
+
+	}
+	output.close();
 
 
-
-
-
---------------------------------------------------------------------------------------------------------*/
+}
 
 
 int main()
@@ -104,6 +126,7 @@ int main()
 	
 	//Test cout of the 4th mark in "ecng1014marks.txt"
 	cout << Marksvec[2][3];
+	writedata(IDvec, Marksvec);
 
 }
 
