@@ -19,8 +19,9 @@ void retrieveData(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
 	string ID;
 	string marks;
 	//inputfile is a string array containing names of all txt files
-	string inputfile[] = { "ecng1006marks.txt", "ecng1009marks.txt", "ecng1014marks.txt", "ecng1016marks.txt" };
-	//int numberOfFiles = sizeof(inputfile);
+	string inputfile[] = { "ecng1006marks.txt", "ecng1009marks.txt", "ecng1014marks.txt", "ecng1016marks.txt"};
+	int fileNums = sizeof(inputfile)/ sizeof(inputfile[0]);
+	cout << fileNums;
 	ifstream input[4]; //An array of ifstreams used to loop.
 		 
 	vector<int> IDvec_sub;			//A 1d vector that is used to temperarily store all ID numbers in each file
