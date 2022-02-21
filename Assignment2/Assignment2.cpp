@@ -73,10 +73,9 @@ void retrieveData(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
 "Calculate the average and GPA for each student using the mark arrays/vectors as input"
 --------------------------------------------------------------------------------------------------------*/
 
-void GPACalculation(vector<vector<int>>& Marksvec)
+void GPACalculation(vector<vector<int>>& Marksvec, vector<double> &average, vector<float> &gpa)
 {
-	vector<double> average;
-	vector<float> gpa;
+	
 
 	int N;
 	float totalGrade;
@@ -103,7 +102,7 @@ void GPACalculation(vector<vector<int>>& Marksvec)
 		//Loop interates through each grade for a specfic student
 		for (int j = 0; j < 4; j++)
 		{
-			 N = 0; //Intilizes the counter variable inside the for loop so it resets for each iteration 
+			 N = 0; //Resets for each iteration 
 			totalGrade = 0; //Intilize a temp variable to sum grades for each student
 			totalqPoints = 0;
 			float grade = Marksvec[i][j]; //Assignes each grade to the temp variable grade
@@ -122,9 +121,12 @@ void GPACalculation(vector<vector<int>>& Marksvec)
 			}
 
 			totalqPoints = totalqPoints + qPoints_temp;
-
-			delete &grade; // Deletes the variable grade so that if a grade is missing it won't hold the grade from the previous iteration
+						
+			//delete &grade; // Deletes the variable grade so that if a grade is missing it won't hold the grade from the previous iteration
+			//grade.clear();
+			  
 		}
+		
 		double avg = totalGrade / N;
 		float GPAtemp = totalqPoints / N;
 
@@ -136,7 +138,7 @@ void GPACalculation(vector<vector<int>>& Marksvec)
 
 
 
-void writedata(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec, vector<vector<double>> gpa, vector<vector<double>> average)
+void writedata(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec, vector<float> gpa, vector<double> average)
 {
 	ofstream output;
 	output.open("studentsummary.txt"); // opens summary file
@@ -159,7 +161,7 @@ void writedata(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec, vector
 
 
 		}
-		output << "		  " << average[0][i] << "		" << gpa[0][i] << endl << endl;
+		output << "		  " << average[i] << "		" << gpa[i] << endl << endl;
 
 	}
 	output.close();
@@ -170,14 +172,17 @@ void writedata(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec, vector
 
 int main()
 {
+	vector<double> average;
+	vector<float> gpa;
 	//These two vectors must be declared in which ever fuction 'retrieveData()' is called in.
 	vector<vector<int>> IDvec;
 	vector<vector<int>> Marksvec;
 
 	retrieveData(IDvec, Marksvec);
-	vector<vector<double>> gpa{ {  1.1 ,  1.2 ,  1.3 , 1.4 ,1.5, 1.6, 1.7, 1.8, 1.9  } }; //repalce with real vector
+	GPACalculation(Marksvec, average, gpa);
+	//vector<vector<double>> gpa{ {  1.1 ,  1.2 ,  1.3 , 1.4 ,1.5, 1.6, 1.7, 1.8, 1.9  } }; //repalce with real vector
 
-	vector<vector<double>> average { { 2.1 ,  2.2 ,  2.3 , 2.4 ,2.5, 2.6, 2.7, 2.8, 2.9 } }; // repalce with real vector
+	//vector<vector<double>> average { { 2.1 ,  2.2 ,  2.3 , 2.4 ,2.5, 2.6, 2.7, 2.8, 2.9 } }; // repalce with real vector
 	//Test cout of the 4th mark in "ecng1014marks.txt"
 	cout << Marksvec[2][3];
 	writedata(IDvec, Marksvec, gpa , average);
