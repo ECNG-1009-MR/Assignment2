@@ -71,14 +71,54 @@ void retrieveData(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
 
 /*Part 2: Nathan ---------------------------------------------------------------------------------------
 "Calculate the average and GPA for each student using the mark arrays/vectors as input"
-
-
-
-
-
-
-
 --------------------------------------------------------------------------------------------------------*/
+
+void GPACalculation(vector<vector<int>>& Marksvec)
+{
+	vector<double> average;
+
+	int N;
+	float totalGrade;
+
+	float qPoints[11][2]{
+		{ 4.3, 100},
+		{ 4.0, 89 },
+		{ 3.7, 79 },
+		{ 3.3, 74 },
+		{ 3.0, 69 },
+		{ 2.7, 64 },
+		{ 2.3, 59 },
+		{ 2.0, 54 },
+		{ 1.7, 49 },
+		{ 1.3, 44 },
+		{ 0.0, 39 },
+	};
+
+	//Creates a loop which iterates though each line of grades for all students
+		for (int i = 0; i < Marksvec[0].size(); i++)
+	{
+		//Loop interates through each grade for a specfic student
+		for (int j = 0; j < 4; j++)
+		{
+			 N = 0; //Intilizes the counter variable inside the for loop so it resets for each iteration 
+			totalGrade = 0; //Intilize a temp variable to sum grades for each student
+			float grade = Marksvec[i][j]; //Assignes each grade to the temp variable grade
+			
+			totalGrade = totalGrade + grade; //Find the total marks for a specific student
+			//Counts the number of grades present in the mark text files
+			if (grade >= 0)
+			{
+				N = N++;
+			}
+
+			delete &grade; // Deletes the variable grade so that if a grade is missing it won't hold the grade from the previous iteration
+		}
+		double avg = totalGrade / N;
+
+		average.push_back(avg);
+	}
+
+}
 
 
 
