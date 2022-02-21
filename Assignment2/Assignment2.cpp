@@ -35,7 +35,7 @@ void retrieveData(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
 	//Loops through all fstreams in the 'input' array
 	for (int j = 0; j < 4; j++)
 	{
-		//verfiy file essists
+		//verfiy file exists
 		if (!input[j].is_open())
 			cout << "Cannot open file: " << inputfile[j] << endl;
 		else
