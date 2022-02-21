@@ -76,9 +76,12 @@ void retrieveData(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
 void GPACalculation(vector<vector<int>>& Marksvec)
 {
 	vector<double> average;
+	vector<float> gpa;
 
 	int N;
 	float totalGrade;
+	float totalqPoints;
+	float qPoints_temp;
 
 	float qPoints[11][2]{
 		{ 4.3, 100},
@@ -102,6 +105,7 @@ void GPACalculation(vector<vector<int>>& Marksvec)
 		{
 			 N = 0; //Intilizes the counter variable inside the for loop so it resets for each iteration 
 			totalGrade = 0; //Intilize a temp variable to sum grades for each student
+			totalqPoints = 0;
 			float grade = Marksvec[i][j]; //Assignes each grade to the temp variable grade
 			
 			totalGrade = totalGrade + grade; //Find the total marks for a specific student
@@ -110,12 +114,22 @@ void GPACalculation(vector<vector<int>>& Marksvec)
 			{
 				N = N++;
 			}
+			for (int k = 0; k < 11;k++)
+			{
+				qPoints_temp = 0; //Rests the variable for each iteration
+				if (grade <= qPoints[k][1] && grade > qPoints[k - 1][1])
+					qPoints_temp = qPoints[k][0];
+			}
+
+			totalqPoints = totalqPoints + qPoints_temp;
 
 			delete &grade; // Deletes the variable grade so that if a grade is missing it won't hold the grade from the previous iteration
 		}
 		double avg = totalGrade / N;
+		float GPAtemp = totalqPoints / N;
 
 		average.push_back(avg);
+		gpa.push_back(GPAtemp);
 	}
 
 }
