@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <limits>
+#include <iomanip>
 using namespace std;
 
 
@@ -18,7 +19,8 @@ void retrieveData(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
 	string ID;
 	string marks;
 	//inputfile is a string array containing names of all txt files
-	string inputfile[] = { "ecng1006marks.txt", "ecng1009marks.txt", "ecng1014marks.txt", "ecng1016marks.txt" }; 
+	string inputfile[] = { "ecng1006marks.txt", "ecng1009marks.txt", "ecng1014marks.txt", "ecng1016marks.txt" };
+	//int numberOfFiles = sizeof(inputfile);
 	ifstream input[4]; //An array of ifstreams used to loop.
 		 
 	vector<int> IDvec_sub;			//A 1d vector that is used to temperarily store all ID numbers in each file
@@ -97,38 +99,46 @@ void GPACalculation(vector<vector<int>>& Marksvec, vector<double> &average, vect
 	};
 
 	//Creates a loop which iterates though each line of grades for all students
-		for (int i = 0; i < Marksvec[0].size(); i++)
+		for (int i = 0; i < 9; i++)
 	{
+			totalGrade = 0; //Intilize a temp variable to sum grades for each student
+			totalqPoints = 0;
+			N = 0; //Resets for each iteration 
 		//Loop interates through each grade for a specfic student
 		for (int j = 0; j < 4; j++)
 		{
-			 N = 0; //Resets for each iteration 
-			totalGrade = 0; //Intilize a temp variable to sum grades for each student
-			totalqPoints = 0;
-			float grade = Marksvec[i][j]; //Assignes each grade to the temp variable grade
-			
-			totalGrade = totalGrade + grade; //Find the total marks for a specific student
-			//Counts the number of grades present in the mark text files
-			if (grade >= 0)
+			 			
+			if (!Marksvec[j].empty())
 			{
-				N = N++;
-			}
-			for (int k = 0; k < 11;k++)
-			{
-				qPoints_temp = 0; //Rests the variable for each iteration
-				if (grade <= qPoints[k][1] && grade > qPoints[k - 1][1])
-					qPoints_temp = qPoints[k][0];
-			}
+				float grade = Marksvec[j][i]; //Assignes each grade to the temp variable grade
 
-			totalqPoints = totalqPoints + qPoints_temp;
-						
-			//delete &grade; // Deletes the variable grade so that if a grade is missing it won't hold the grade from the previous iteration
-			//grade.clear();
-			  
+				totalGrade = totalGrade + grade; //Find the total marks for a specific student
+				//Counts the number of grades present in the mark text files
+				if (grade >= 0)
+				{
+					N = N++;
+				}
+				for (int k = 0; k < 11; k++)
+				{
+					//qPoints_temp = 0; //Rests the variable for each iteration
+					if (grade <= qPoints[k][1] && qPoints[k-1][1])
+						qPoints_temp = qPoints[k][0];
+						//break;
+				}
+
+				totalqPoints = totalqPoints + qPoints_temp;
+
+				//delete &grade; // Deletes the variable grade so that if a grade is missing it won't hold the grade from the previous iteration
+				//grade.clear();
+			}
+			else{
+				continue;
+			}
+			
 		}
 		
-		double avg = totalGrade / N;
-		float GPAtemp = totalqPoints / N;
+		double avg = totalGrade / (double)N;
+		float GPAtemp = totalqPoints / (float)N;
 
 		average.push_back(avg);
 		gpa.push_back(GPAtemp);
@@ -161,7 +171,7 @@ void writedata(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec, vector
 
 
 		}
-		output << "		  " << average[i] << "		" << gpa[i] << endl << endl;
+		output << "		  " <<fixed<<setprecision(1)<< average[i] << "		" << gpa[i] << endl << endl;
 
 	}
 	output.close();
