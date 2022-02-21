@@ -65,7 +65,8 @@ void retrieveData(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
 		}
 
 		//Input each string from the current 'input' fstream into 'ID' and 'marks' variables.
-		//Assuming each string in the file starts with an Id number then marks, it will alternate between inputting into the 'ID' variable and 'marks' variable
+		//Assuming each string in the file starts with an Id number then marks, 
+		//it will alternate between inputting into the 'ID' variable and 'marks' variable
 		while (input[j] >> ID >> marks)
 		{
 			//Converts all Id numbers to a long int, and pushes them into a 1d temp vector.
@@ -142,8 +143,6 @@ void GPACalculation(vector<vector<int>>& Marksvec, vector<double> &average, vect
 
 				totalqPoints = totalqPoints + qPoints_temp;
 
-				//delete &grade; // Deletes the variable grade so that if a grade is missing it won't hold the grade from the previous iteration
-				//grade.clear();
 			}
 			else{
 				continue;
