@@ -6,20 +6,20 @@
 #include <vector>
 #include <limits>
 #include <iomanip>
-using namespace std;
+
 
 
 //Function forward declarations
-void retrieveData(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec);
-void GPACalculation(vector<vector<int>>& Marksvec, vector<double>& average, vector<float>& gpa);
-void writedata(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec, vector<float> gpa, vector<double> average);
+void retrieveData(std::vector<std::vector<int>>& IDvec, std::vector<std::vector<int>>& Marksvec);
+void GPACalculation(std::vector<std::vector<int>>& Marksvec, std::vector<double>& average, std::vector<float>& gpa);
+void writedata(std::vector<std::vector<int>>& IDvec, std::vector<std::vector<int>>& Marksvec, std::vector<float> gpa, std::vector<double> average);
 
 int main()
 {
-	vector<double> average;
-	vector<float> gpa;
-	vector<vector<int>> IDvec;
-	vector<vector<int>> Marksvec;
+	std::vector<double> average;
+	std::vector<float> gpa;
+	std::vector<std::vector<int>> IDvec;
+	std::vector<std::vector<int>> Marksvec;
 
 	retrieveData(IDvec, Marksvec);
 	GPACalculation(Marksvec, average, gpa);
@@ -30,20 +30,20 @@ int main()
 }
 
 
-void retrieveData(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
+void retrieveData(std::vector<std::vector<int>>& IDvec, std::vector<std::vector<int>>& Marksvec)
 {
 	//Passes the memory address of IDvec and Marksvec into this function. This allows the vectors to be modified in this function
 	//IDvec:		//A 2d vector that will contain vectors of ID numbers from each file
 	//Marksvec:		//A 2d vector that will contain vectors of marks from each file
 
-	string ID;
-	string marks;
+	std::string ID;
+	std::string marks;
 	//inputfile is a string array containing names of all txt files
-	string inputfile[] = { "ecng1006marks.txt", "ecng1009marks.txt", "ecng1014marks.txt", "ecng1016marks.txt" };
-	ifstream input[4]; //An array of ifstreams used to loop.
+	std::string inputfile[] = { "ecng1006marks.txt", "ecng1009marks.txt", "ecng1014marks.txt", "ecng1016marks.txt" };
+	std::ifstream input[4]; //An array of ifstreams used to loop.
 
-	vector<int> IDvec_sub;			//A 1d vector that is used to temperarily store all ID numbers in each file
-	vector<int> Marksvec_sub;		//A 1d vector that is used to temperarily store all marks in each file
+	std::vector<int> IDvec_sub;			//A 1d vector that is used to temperarily store all ID numbers in each file
+	std::vector<int> Marksvec_sub;		//A 1d vector that is used to temperarily store all marks in each file
 
 
 	//Creates a loop that opens all text files from 'inputfile' array into respective fstream from 'input' array
@@ -58,10 +58,10 @@ void retrieveData(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
 	{
 		//verfiy file exists
 		if (!input[j].is_open())
-			cout << "Cannot open file: " << inputfile[j] << endl;
+			std::cout << "Cannot open file: " << inputfile[j] << std::endl;
 		else
 		{
-			cout << "file found: " << inputfile[j] << endl;
+			std::cout << "file found: " << inputfile[j] << std::endl;
 		}
 
 		//Input each string from the current 'input' fstream into 'ID' and 'marks' variables.
@@ -90,7 +90,7 @@ void retrieveData(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec)
 }
 
 
-void GPACalculation(vector<vector<int>>& Marksvec, vector<double> &average, vector<float> &gpa)
+void GPACalculation(std::vector<std::vector<int>>& Marksvec, std::vector<double> &average, std::vector<float> &gpa)
 {
 	
 
@@ -160,14 +160,14 @@ void GPACalculation(vector<vector<int>>& Marksvec, vector<double> &average, vect
 }
 
 
-void writedata(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec, vector<float> gpa, vector<double> average)
+void writedata(std::vector<std::vector<int>>& IDvec, std::vector<std::vector<int>>& Marksvec, std::vector<float> gpa, std::vector<double> average)
 {
-	ofstream output;
+	std::ofstream output;
 	output.open("studentsummary.txt"); // opens summary file
 	for (int i = 0; i < IDvec[0].size(); i++)  // loop to determine row to get data from
 	{
 
-		output << " Student		ECNG1006	ECNG1009	ECNG1014	ECNG1016	Average		GPA	" << endl;
+		output << " Student		ECNG1006	ECNG1009	ECNG1014	ECNG1016	Average		GPA	" << std::endl;
 		output << IDvec[0][i]; // outputs the id number at the i position of the vector
 		for (int j = 0; j < 4; j++) // loop to determine column to get data from
 		{
@@ -183,7 +183,7 @@ void writedata(vector<vector<int>>& IDvec, vector<vector<int>>& Marksvec, vector
 
 
 		}
-		output << "		  " <<fixed<<setprecision(1)<< average[i] << "		" << gpa[i] << endl << endl;
+		output << "		  " << std::fixed<< std::setprecision(1)<< average[i] << "		" << gpa[i] << std::endl << std::endl;
 
 	}
 	output.close();
