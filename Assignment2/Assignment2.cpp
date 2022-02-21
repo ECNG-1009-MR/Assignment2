@@ -56,12 +56,17 @@ void retrieveData(std::vector<std::vector<int>>& IDvec, std::vector<std::vector<
 	//Loops through all fstreams in the 'input' array
 	for (int j = 0; j < 4; j++)
 	{
-		//verfiy file exists
+		//Verfiy that file exists. If not, it exits.
 		if (!input[j].is_open())
+		{
 			std::cout << "Cannot open file: " << inputfile[j] << std::endl;
+			std::cout << "Program will now end." << std::endl;
+			exit(0);
+		}
+			
 		else
 		{
-			std::cout << "file found: " << inputfile[j] << std::endl;
+			std::cout << "File found: " << inputfile[j] << std::endl;
 		}
 
 		//Input each string from the current 'input' fstream into 'ID' and 'marks' variables.
@@ -188,6 +193,7 @@ void writedata(std::vector<std::vector<int>>& IDvec, std::vector<std::vector<int
 	}
 	output.close();
 
+	std::cout << "\nFile 'studentsummary.txt' successfully created." << std::endl;
 
 }
 
