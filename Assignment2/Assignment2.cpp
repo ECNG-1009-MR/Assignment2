@@ -119,7 +119,7 @@ void GPACalculation(std::vector<std::vector<int>>& Marksvec, std::vector<double>
 	};
 
 	//Creates a loop which iterates though each line of grades for all students
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < Marksvec[0].size(); i++)
 	{
 			totalGrade = 0; //Intilize a temp variable to sum grades for each student
 			totalqPoints = 0;
