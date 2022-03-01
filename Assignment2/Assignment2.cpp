@@ -134,10 +134,8 @@ void GPACalculation(std::vector<std::vector<int>>& Marksvec, std::vector<double>
 
 				totalGrade = totalGrade + grade; //Find the total marks for a specific student
 				//Counts the number of grades present in the mark text files
-				if (grade >= 0)
-				{
-					N = N++;
-				}
+				N = N++;
+
 				for (int k = 0; k < 11; k++)
 				{
 					//qPoints_temp = 0; //Rests the variable for each iteration
