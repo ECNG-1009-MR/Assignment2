@@ -143,7 +143,7 @@ void GPACalculation(std::vector<std::vector<int>>& Marksvec, std::vector<double>
 					//qPoints_temp = 0; //Rests the variable for each iteration
 					if (grade <= qPoints[k][1]) 
 						qPoints_temp = qPoints[k][0];
-						//break;
+						
 				}
 
 				totalqPoints = totalqPoints + qPoints_temp;
