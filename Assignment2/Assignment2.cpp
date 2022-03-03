@@ -42,8 +42,8 @@ void retrieveData(std::vector<std::vector<int>>& IDvec, std::vector<std::vector<
 	std::string inputfile[] = { "ecng1006marks.txt", "ecng1009marks.txt", "ecng1014marks.txt", "ecng1016marks.txt" };
 	std::ifstream input[4]; //An array of ifstreams used to loop.
 
-	std::vector<int> IDvec_sub;			//A 1d vector that is used to temperarily store all ID numbers in each file
-	std::vector<int> Marksvec_sub;		//A 1d vector that is used to temperarily store all marks in each file
+	std::vector<int> IDvec_sub;			//A 1d vector that is used to temporarily store all ID numbers in each file
+	std::vector<int> Marksvec_sub;		//A 1d vector that is used to temporarily store all marks in each file
 
 
 	//Creates a loop that opens all text files from 'inputfile' array into respective fstream from 'input' array
@@ -56,7 +56,7 @@ void retrieveData(std::vector<std::vector<int>>& IDvec, std::vector<std::vector<
 	//Loops through all fstreams in the 'input' array
 	for (int j = 0; j < 4; j++)
 	{
-		//Verfiy that file exists. If not, it exits.
+		//Verify that file exists. If not, it exits.
 		if (!input[j].is_open())
 		{
 			std::cout << "Cannot open file: " << inputfile[j] << std::endl;
@@ -97,13 +97,18 @@ void retrieveData(std::vector<std::vector<int>>& IDvec, std::vector<std::vector<
 
 void GPACalculation(std::vector<std::vector<int>>& Marksvec, std::vector<double> &average, std::vector<float> &gpa)
 {
+	//Passes the memory address of Marksvec, average and gpa into this function. This allows the vectors to be modified
+	// in this function
+	//Marksvec:	 A 2d vector that will contain vectors of marks from each file
+	//average:	A 1d vector that will store the values for the average grade
+	//gpa:		A 1d vector that will store the values for the gpa
 	
 
 	int N;
 	float totalGrade;
 	float totalqPoints;
 	float qPoints_temp;
-
+	//An array which holds the quality points and respective upper limit of its grade range.
 	float qPoints[11][2]{
 		{ 4.3, 100},
 		{ 4.0, 89 },
@@ -121,24 +126,27 @@ void GPACalculation(std::vector<std::vector<int>>& Marksvec, std::vector<double>
 	//Creates a loop which iterates though each line of grades for all students
 		for (int i = 0; i < Marksvec[0].size(); i++)
 	{
-			totalGrade = 0; //Intilize a temp variable to sum grades for each student
+			//Assigns a value of zero for the following variable on each iteration of the for loop
+			totalGrade = 0; 
 			totalqPoints = 0;
-			N = 0; //Resets for each iteration 
-		//Loop interates through each grade for a specfic student
+			N = 0; 
+
+		//Loop iterates through each grade for a specific student
 		for (int j = 0; j < 4; j++)
 		{
 			 			
-			if (!Marksvec[j].empty())
+			if (!Marksvec[j].empty()) //Checks if each row of data has a value
 			{
-				float grade = Marksvec[j][i]; //Assignes each grade to the temp variable grade
+				float grade = Marksvec[j][i]; //Assigns each mark in the Marksvec vector to the temp variable "grade"
 
 				totalGrade = totalGrade + grade; //Find the total marks for a specific student
-				//Counts the number of grades present in the mark text files
-				N = N++;
+				
+				N = N++;	//Counts the number of grades present in the mark text files
 
-				for (int k = 0; k < 11; k++)
+				for (int k = 0; k < 11; k++) //Loop iterates through the quality points array
 				{
-					//qPoints_temp = 0; //Rests the variable for each iteration
+					//Determines if the grade is less than or equal to the upper bound of a quality point grade range
+					//and assigns the respective quality point
 					if (grade <= qPoints[k][1]) 
 						qPoints_temp = qPoints[k][0];
 						
@@ -147,15 +155,13 @@ void GPACalculation(std::vector<std::vector<int>>& Marksvec, std::vector<double>
 				totalqPoints = totalqPoints + qPoints_temp;
 
 			}
-			else{
-				continue;
-			}
 			
 		}
 		
 		double avg = totalGrade / (double)N;
 		float GPAtemp = totalqPoints / (float)N;
 
+		//Attaches the calculated values to the end of the average and gpa vectors
 		average.push_back(avg);
 		gpa.push_back(GPAtemp);
 	}
