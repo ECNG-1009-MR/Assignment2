@@ -1,4 +1,15 @@
-// Assignment2.cpp : This file contains the 'main' function. Program execution begins and ends there.
+/*Program by Group MR
+Members:
+1)Nathan Ragoobar
+2)Nyckel St. Louis
+3)Matthias Elliot
+4)Nikolai Pillai
+5)Ouinton Aleong
+7)Rajiv Sahadeo
+8)Chad Moore
+9)Matthew Williams
+*/
+
 
 #include <iostream>
 #include <fstream>
@@ -181,14 +192,14 @@ void writedata(std::vector<std::vector<int>>& IDvec, std::vector<std::vector<int
 		for (int j = 0; j < 4; j++) // loop to determine column to get data from
 		{
 
-			if (Marksvec[j].empty()) //outputs N/A and goes to next value of j if there is no data
+			if (Marksvec[j].empty()) 
 			{
-				output << "		  N/A";
-				continue;
-
+				output << "		  N/A"; //outputs N/A if there is no data
 			}
-
-			output << "		   " << Marksvec[j][i]; // outputs data from the j column i row
+			else
+			{
+				output << "		   " << Marksvec[j][i]; // outputs data from the j column i row if there is data
+			}
 
 
 		}
