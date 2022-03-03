@@ -4,10 +4,10 @@ Members:
 2)Nyckel St. Louis
 3)Matthias Elliot
 4)Nikolai Pillai
-5)Ouinton Aleong
-7)Rajiv Sahadeo
-8)Chad Moore
-9)Matthew Williams
+5)Quinton Aleong
+6)Rajiv Sahadeo
+7)Chad Moore
+8)Matthew Williams
 */
 
 
@@ -110,7 +110,6 @@ void GPACalculation(std::vector<std::vector<int>>& Marksvec, std::vector<double>
 {
 	//Passes the memory address of Marksvec, average and gpa into this function. This allows the vectors to be modified
 	// in this function
-	//Marksvec:	 A 2d vector that will contain vectors of marks from each file
 	//average:	A 1d vector that will store the values for the average grade
 	//gpa:		A 1d vector that will store the values for the gpa
 	
@@ -134,7 +133,7 @@ void GPACalculation(std::vector<std::vector<int>>& Marksvec, std::vector<double>
 		{ 0.0, 39 },
 	};
 
-	//Creates a loop which iterates though each line of grades for all students
+		//Creates a loop which iterates though each line of grades for all students
 		for (int i = 0; i < Marksvec[0].size(); i++)
 	{
 			//Assigns a value of zero for the following variable on each iteration of the for loop
